@@ -1,2 +1,2 @@
 # OpticalProgramProject-Angular
-Optical Program Project [Angular] [Project only for reference purpose]
+Optical Program Project [Angular] [Project is for reference purpose only ]
