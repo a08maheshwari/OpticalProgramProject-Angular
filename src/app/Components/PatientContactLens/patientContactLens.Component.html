@@ -1,0 +1,756 @@
+
+<div id="page-content-wrapper" class="dashboard">
+    <div class="col welcome-bar "><!-- welcome bar -->
+        <h1 class="page-title">Dashboard</h1>    
+    </div>
+
+    <div class="content-area">
+        <form [formGroup]="patientContactLensForm" (ngSubmit)="addContactLens(patientContactLensForm.value,patientContactLensForm.valid)">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="col_inner">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtComp">{{ "Company" | translate }}:</label>
+                                <input name="txtComp" type="text" id="txtComp" class="form-control" [(ngModel)]="contactLensModel.Company" formControlName="Company"
+                                    disabled="disabled" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtPrescription">{{ "Prescription No." | translate }}:</label>
+                                <input name="txtPrescription" type="text" id="txtPrescription" class="form-control" [(ngModel)]="contactLensModel.Prescription"
+                                    formControlName="Prescription" disabled="disabled" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtDate">{{ "Date" | translate }}:</label>
+                                <input name="txtDate" type="text" id="txtDate" class="form-control" [(ngModel)]="contactLensModel.Date" formControlName="Date"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtProfessional">{{ "Professional" | translate }}:</label>
+                                <input name="txtProfessional" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.Professional"
+                                    formControlName="Professional" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtPatient">{{ "Patient" | translate }}:</label>
+                                <input name="txtPatient" type="text" id="txtPatient" class="form-control" [(ngModel)]="contactLensModel.Patient" formControlName="Patient"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtExam">{{ "Exam No." | translate }}:</label>
+                                <input name="txtExam" type="text" id="txtExam" class="form-control" [(ngModel)]="contactLensModel.Exam" formControlName="Exam"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtLabInvoice">{{ "Lab Invoice No." | translate }}:</label>
+                                <input name="txtLabInvoice" type="text" id="txtLabInvoice" class="form-control" [(ngModel)]="contactLensModel.LabInvoice"
+                                    formControlName="LabInvoice" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtTrayNumber">{{ "Tray No." | translate }}:</label>
+                                <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                    formControlName="TrayNumber" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="col-md-12 col-sm-12">
+            <div class="col_inner">
+            <div class="row">
+                    <div class="col-sm-12">Rx</div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <label> OD</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Sphere" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Cylinder" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Axis" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Addition" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Segh" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "O.Z" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Trail" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <label> OS</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Sphere" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Cylinder" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Axis" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Addition" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Segh" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "O.Z" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Trail" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+            </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="col_inner">
+                    <div class="row">
+                        <div class="col-sm-12">Rx</div>
+                        <div class="col-sm-6">Base curve</div>
+                        <div class="col-sm-6">Diameter</div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <label> OD</label>
+                                </div>
+                                <div class="col-sm-10">
+                                
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="txtTrayNumber">{{ "Base1" | translate }}:</label>
+                                            <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                                formControlName="TrayNumber" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="txtTrayNumber">{{ "Base2" | translate }}:</label>
+                                            <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                                formControlName="TrayNumber" />
+                                        </div>
+                                    </div>
+                                
+                                
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="txtTrayNumber">{{ "Horiz." | translate }}:</label>
+                                            <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                                formControlName="TrayNumber" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="txtTrayNumber">{{ "Vert." | translate }}:</label>
+                                            <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                                formControlName="TrayNumber" />
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-sm-1">
+                                      
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-1">
+                                        <label> OS</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="txtTrayNumber">{{ "Base1" | translate }}:</label>
+                                            <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                                formControlName="TrayNumber" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="txtTrayNumber">{{ "Base2" | translate }}:</label>
+                                            <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                                formControlName="TrayNumber" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="txtTrayNumber">{{ "Horiz." | translate }}:</label>
+                                            <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                                formControlName="TrayNumber" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="txtTrayNumber">{{ "Vert." | translate }}:</label>
+                                            <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                                formControlName="TrayNumber" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                    <div class="col_inner">
+                            <label>{{ "Keratometry" | translate }}</label>
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                    
+                                
+                                    <div class="col-md-1">
+                                      <label> OD:</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                    <div class="col-md-1">
+                                        /
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                    <div class="col-md-1">
+                                        X
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+    
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                
+                                    <div class="col-md-1">
+                                        <label> OS:</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                    <div class="col-md-1">
+                                        /
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                    <div class="col-md-1">
+                                        X
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+    
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="col_inner">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Keyword" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Product" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Type" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        disabled formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Category" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        disabled formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Sub Cat." | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        disabled formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="txtTrayNumber">{{ "Supplier" | translate }}:</label>
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        disabled formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                        </div>                                   
+                            
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                <div class="col_inner">
+                                  
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                
+                                <div class="col-sm-6">
+                                        <label> OD</label>
+                                </div>
+                            </div>
+                            <div class="row"  style="background: #e8e8e8; margin:0px">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "Pupil Size" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "Corneal Size" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "TOT" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "B.U.T." | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "Centration" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "MOL" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "VS acuity far" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "VS acuity close" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6" >
+                            <div class="row">
+                                    
+                                    <div class="col-sm-6">
+                                            <label> OD</label>
+                                    </div>
+                                </div>
+                            <div class="row" style="background: #e8e8e8; margin: 0px">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "Pupil Size" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "Corneal Size" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "TOT" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "B.U.T." | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "Centration" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "MOL" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "VS acuity far" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txtTrayNumber">{{ "VS acuity close" | translate }}:</label>
+                                        <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                            formControlName="TrayNumber" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+            <div class="col_inner">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Contact lenses</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                        <label>OD:</label>
+                                </div>
+                                <div class="col-md-11">
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Price</label>
+                                </div>                               
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-1">
+                                        <label>OS:</label>
+                                </div>
+                                <div class="col-md-11">
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Tint</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Replacement Date</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-1">
+                                        <label>OD:</label>
+                                </div>
+                                <div class="col-md-11">
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label> OS:</label>
+                                </div>
+                                <div class="col-md-11">
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                   <label> Solution</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                        formControlName="TrayNumber" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+            <div class="col_inner">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtTrayNumber">{{ "Ready" | translate }}:</label>
+                                <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                    formControlName="TrayNumber" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtTrayNumber">{{ "Advice client" | translate }}:</label>
+                                <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                    formControlName="TrayNumber" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtTrayNumber">{{ "Follow-up" | translate }}:</label>
+                                <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                    formControlName="TrayNumber" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtTrayNumber">{{ "Date called" | translate }}:</label>
+                                <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                    formControlName="TrayNumber" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtTrayNumber">{{ "Delivery date" | translate }}:</label>
+                                <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                    formControlName="TrayNumber" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtTrayNumber">{{ "Notes:" | translate }}:</label>
+                                <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                    formControlName="TrayNumber" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtTrayNumber">{{ "Professional fees" | translate }}:</label>
+                                <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                    formControlName="TrayNumber" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtTrayNumber">{{ "Total" | translate }}:</label>
+                                <input name="txtTrayNumber" type="text" id="txtProfessional" class="form-control" [(ngModel)]="contactLensModel.TrayNumber"
+                                    formControlName="TrayNumber" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-md-12 col-sm-12">
+                <div class="col_inner">
+                    <div class="row">
+                        <input type="submit" class="button expanded" value="Save" class="btn btn-primary">          
+                        <input type="submit" class="button expanded" value="Invoice"  class="btn btn-primary">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="col welcome-bar">
+    <h1 class="page-title">Users</h1>
+</div>
+<div class="content-area">
+    <div class="col-md-12">
+        <p-dataTable [value]="cars" [scrollable]="true" [lazy]="true" (onLazyLoad)="GetUsers($event)" [totalRecords]="totalRecords">
+            <p-column field="Name" header="Name"></p-column>
+            <p-column field="UserName" header="User name"></p-column>
+            <p-column field="LastActivity" header="Last Activity"></p-column>
+            <p-column field="Position" header="Position"></p-column>
+            <p-column field="CreatedDate" header="Created Date"></p-column>
+            <p-column field="Action" header="Action">
+                <ng-template pTemplate="header">
+                    {{ 'action' | translate }}
+                </ng-template>
+                <ng-template let-paitientListing="rowData" pTemplate="body">
+                    <button type="button" pButton (click)="changePermission(paitientListing.PatientID)" icon="fa-unlock-alt"></button>
+                    <button type="button" pButton (click)="editUser(paitientListing.PatientID)"  icon="fa-pencil-square-o"></button>
+                    <button type="button" pButton (click)="deleteUser(paitientListing.PatientID)" icon="fa-trash-o" class="ui-button-danger"></button>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</div>

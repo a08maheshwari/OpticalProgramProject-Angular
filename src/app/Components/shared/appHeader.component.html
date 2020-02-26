@@ -1,0 +1,52 @@
+<!--header start-->
+<header class="loggedin_header">
+   <div class="container-fluid">
+      <div class="row">
+        <div class="header_logo">
+            <img src="assets/images/logo.png" width="94" height="48" alt="logo" />
+        </div>  
+       
+        
+      
+        <a class="ham nav-icon1" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+        <div class="col-sm-10 col-xs-10 col-md-6 check-header pull-right">
+          <div class="btn-group user-btn">
+            <button type="button" class="drop-box dropdown-toggle" data-ripple="" data-toggle="dropdown" aria-expanded="false"> 
+                 <img src="assets/images/user.png" alt=""> 
+                 <span class="hidden-xs-down">John Smith</span> <i class="fa fa-user-o" aria-hidden="true"></i> </button>
+                <ul class="dropdown-menu" role="menu">
+                   <li><a href="account.html" target="_blank"><i class="fa fa-user" aria-hidden="true"></i> Account </a></li>
+                   <li><a (click)="logout()"><i class="fa fa-sign-out"  aria-hidden="true"></i> Logout</a></li>
+                </ul>
+          </div>
+          <div class="noti"> 
+              <a href="#" class="ic dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-envelope-o" aria-hidden="true"></i> 
+                <span class="dot"></span> 
+              </a> 
+            <a href="#" class="ic dropdown-toggle"  data-toggle="dropdown">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+                <span class="dot"></span> 
+            </a>
+            
+          </div>
+          <div class="select_language">
+            <div *ngIf="isEnglish ==false" (click)="changeLang('en')" >
+                <img src="assets/images/en_flag.png" width="16" height="11" alt="flag"/>
+                <span>Eng</span>
+            </div>
+            <div  *ngIf="isEnglish" (click)="changeLang('fr')" >
+                <img src="assets/images/fr_flag.png" width="16" height="11" alt="flag"/>
+                <span>Fr</span>
+            </div>
+          </div>
+          
+         </div>
+      </div>
+   </div>  
+</header>
+<!--header end-->

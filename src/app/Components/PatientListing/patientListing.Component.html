@@ -1,0 +1,97 @@
+<div class="col welcome-bar ">
+    <!-- welcome bar -->
+    <h1 class="page-title">{{ 'patient' | translate }}</h1>
+  
+</div>
+<div class="content-area">
+    <div class="content-area-inner col-md-12">
+        <div class="pateint_listing">
+            <div class="add_pateint">
+                <button class="add_patient" (click)="openAddPatientForm()" >
+                        <i class="fa fa-user" aria-hidden="true"></i> {{ 'addPatient' | translate }}
+                    </button>
+            </div>
+            <div class="filters">
+                <form [formGroup]="sForm" (ngSubmit)="PatientListing(sForm.value,sForm.valid)">
+                    <div class="row">
+                        <div class="col-md-1">
+                                    <label>{{ 'fileNo' | translate }}</label>
+                                    <input type="text" class="form-control" placeholder="Name" placeholder="" [(ngModel)]="patientFilterModel.FileNo"
+                                        formControlName="FileNo" />
+                                </div>
+                        <div class="col-md-2">
+                            <label> {{ 'name' | translate }}</label>
+                            <input type="text" placeholder="" [(ngModel)]="patientFilterModel.Name" class="form-control" formControlName="Name" />
+                        </div>
+                      
+                        <div class="col-md-2">
+                            <label>{{ 'CellPhone' | translate }}</label>
+                            <p-inputMask  unmask="true" mask="(999)999-9999" slotChar="_"[(ngModel)]="patientFilterModel.CellPhone" formControlName="CellPhone"></p-inputMask>  
+                            <!-- <input type="text" class="form-control" placeholder="" [(ngModel)]="patientFilterModel.CellPhone" formControlName="CellPhone"
+                            /> -->
+                        </div>
+                        <div class="col-md-2">
+                            <label>{{ 'HomePhone' | translate }}</label>
+                            <p-inputMask  unmask="true" mask="(999)999-9999" slotChar="_"[(ngModel)]="patientModel.HomePhone" formControlName="HomePhone"></p-inputMask>  
+                            <!-- <input type="text" class="form-control" placeholder="" [(ngModel)]="patientFilterModel.HomePhone" formControlName="HomePhone"
+                            /> -->
+                        </div>
+                        <div class="col-md-3">
+                            <label>{{ 'DateofBirth' | translate }}</label>
+                             <p-calendar  [(ngModel)]="patientFilterModel.DateOfBirth" placeholder="" dateFormat="mm/dd/yy" formControlName="DateOfBirth"></p-calendar> 
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <button type="reset" class="reset_btn" (click)="resetSearch()"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="table-responsive">
+                <!-- <p-dataTable [value]="paitientListing" [rows]="Rows" [pageLinks]="3" [paginator]="true" (onPage)="paginate($event)" [rowsPerPageOptions]="[5,10,20]"
+                        [totalRecords]="totalRecords"> -->
+                <!-- <p-dataTable [value]="paitientListing" [rows]="Rows" [lazy]="true" (onLazyLoad)="loadCarsLazy($event)"  [rowsPerPageOptions]="[5,10,20]"
+                        [totalRecords]="totalRecords">  -->
+                <p-dataTable sortField="FileNo" [sortOrder]="1" [value]="paitientListing" [lazy]="true" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20]"
+                    [totalRecords]="totalRecords" (onLazyLoad)="loadPatientListing($event)">
+                    <p-column field="PatientID" header="{{ 'fileNo' | translate }}" [sortable]="true"></p-column>
+                    <!-- <p-column field="CreatedDate" header="Opening Date"></p-column> -->
+                    <p-column field="CreatedDate" header="{{ 'OpeningDate' | translate }}" [style]="{'text-align': 'center'}" [sortable]="true">
+                        <template let-paitientListing="rowData" pTemplate type="body">
+                            <span>{{paitientListing.CreatedDate|date: 'MM/dd/yyyy'}}</span>
+                        </template>
+                    </p-column>
+                    <p-column field="LastName" header="{{ 'LastName' | translate }}"></p-column>
+                    <p-column field="FirstName" header="{{ 'FirstName' | translate }}"></p-column>
+                    <p-column field="Gender" header="{{ 'Gender' | translate }}" [sortable]="true"></p-column>
+                    <p-column field="CellPhone" header="{{ 'CellPhone' | translate }}" [sortable]="true">   </p-column>
+                    <!-- <ng-template>
+                            <p-inputMask  unmask="true" mask="(999)999-9999" slotChar="_"[(ngModel)]="paitientListing.CellPhone" formControlName="HomePhone"></p-inputMask>  
+                        </ng-template> -->
+                 
+                    <p-column field="HomePhone" header="{{ 'HomePhone' | translate }}" [sortable]="true"></p-column>
+                    <!-- <p-column field="DateOfBirth |date: 'MM-dd-yyyy'" header="Date Of Birth"> -->
+                    <p-column header="{{ 'DateofBirth' | translate }}" [style]="{'text-align': 'center'}" >
+                        <template let-paitientListing="rowData" pTemplate type="body">
+                            <span>{{paitientListing.DateOfBirth|date: 'MM/dd/yyyy'}}</span>
+                        </template>
+                    </p-column>
+                     
+ <p-column styleClass="col-button">
+        <ng-template pTemplate="header">
+            {{ 'action' | translate }}
+        </ng-template>
+        <ng-template let-paitientListing="rowData" pTemplate="body">
+            <button type="button" pButton (click)="editPatient(paitientListing.PatientID)"  icon="fa-pencil-square-o"></button>
+              <button type="button" pButton (click)="deletePatient(paitientListing.PatientID)" icon="fa-trash-o" class="ui-button-danger"></button>
+        </ng-template>
+    </p-column> 
+
+
+                </p-dataTable>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,334 @@
+<div class="col welcome-bar">
+    <!-- welcome bar -->
+    <h1 class="page-title">{{ 'agenda' | translate }}</h1>
+</div>
+<div class="content-area">
+    <div class="col-md-12">
+            <p-growl [(value)]="msgs" life="2000"></p-growl>
+        <p-dialog [(visible)]="UpdateEncounter" [draggable]="false" header="{{ 'updateAppointment' | translate }}" [width]="550">
+            <form [formGroup]="updateAppointmentForm" (ngSubmit)="modifyEncounter(updateAppointmentForm.value)">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{{ "select" | translate }}</label>
+                        <p-dropdown formControlName="PatientID" [options]="updateSlotModel.listPatients" [(ngModel)]="updateSlotModel.PatientID" (onChange)="getPatientDetailByID()"
+                            [filter]="true"></p-dropdown>
+                        <div *ngIf="updateAppointmentForm.controls['PatientID'].dirty && !updateAppointmentForm.controls['PatientID'].valid && updateAppointmentForm.controls['PatientID'].touched && updateAppointmentForm.controls['PatientID'].errors"
+                            class="error-message">
+                            <div style="color:Red" *ngIf="updateAppointmentForm.controls['PatientID'].errors.required"> Select patient name </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ "DateofBirth" | translate }}</label>
+                        <p-calendar  formControlName="DateOfBirth"  [(ngModel)]="updateSlotModel.DateOfBirth" disabled="true"></p-calendar>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{{ "examType" | translate }}</label>
+                        <p-dropdown formControlName="ExamTypeID" [options]="updateSlotModel.listTestType" [(ngModel)]="updateSlotModel.ExamTypeID" placeholder="{{ 'select' | translate }}"></p-dropdown>
+                        <div *ngIf="updateAppointmentForm.controls['ExamTypeID'].dirty && !updateAppointmentForm.controls['ExamTypeID'].valid && updateAppointmentForm.controls['ExamTypeID'].touched && updateAppointmentForm.controls['ExamTypeID'].errors"
+                            class="error-message">
+                            <div style="color:Red" *ngIf="updateAppointmentForm.controls['ExamTypeID'].errors.required">Please select exam type</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ "status" | translate }}</label>
+                        <p-dropdown formControlName="StatusID" [options]="updateSlotModel.listStatus" [(ngModel)]="updateSlotModel.StatusID" placeholder="{{ 'select' | translate }}"></p-dropdown>
+                        <div *ngIf="updateAppointmentForm.controls['StatusID'].dirty && !updateAppointmentForm.controls['StatusID'].valid && updateAppointmentForm.controls['StatusID'].touched && updateAppointmentForm.controls['StatusID'].errors"
+                            class="error-message">
+                            <div style="color:Red" *ngIf="updateAppointmentForm.controls['StatusID'].errors.required">Please select appointment status</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{{ "appointmentDate" | translate }}</label>
+                        <p-calendar formControlName="AppDate" [disabledDays]="calendarModel.disabledDays" [(ngModel)]="updateSlotModel.AppDate"></p-calendar>
+                        <div *ngIf="updateAppointmentForm.controls['AppDate'].dirty && !updateAppointmentForm.controls['AppDate'].valid && updateAppointmentForm.controls['AppDate'].touched && updateAppointmentForm.controls['AppDate'].errors"
+                            class="error-message">
+                            <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppDate'].errors.required"> Please select appointment Date</div>
+                            <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppDate'].errors.checkValidDate"> Please select a valid appointment Date</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ "startTime" | translate }}</label>
+                        <p-calendar formControlName="AppStartTime" [(ngModel)]="updateSlotModel.AppStartTime" timeOnly="true" showTime="showTime" hourFormat="12"></p-calendar>
+                        <div *ngIf="updateAppointmentForm.controls['AppStartTime'].dirty && !updateAppointmentForm.controls['AppStartTime'].valid && updateAppointmentForm.controls['AppStartTime'].touched && updateAppointmentForm.controls['AppStartTime'].errors"
+                            class="error-message">
+                            <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppStartTime'].errors.required">Please select appointment start time</div>
+                            <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppStartTime'].errors.validAppDuration">Please select valid appointment start time</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{{ "endTime" | translate }}</label>
+                        <p-calendar formControlName="AppEndTime" [(ngModel)]="updateSlotModel.AppEndTime" timeOnly="true" showTime="showTime" hourFormat="12"></p-calendar>
+                        <div *ngIf="updateAppointmentForm.controls['AppEndTime'].dirty && !updateAppointmentForm.controls['AppEndTime'].valid && updateAppointmentForm.controls['AppEndTime'].touched && updateAppointmentForm.controls['AppEndTime'].errors"
+                            class="error-message">
+                            <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppEndTime'].errors.required">Please select appointment end time</div>
+                            <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppEndTime'].errors.validAppDuration">Please select valid appointment end time</div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{{ "description" | translate }}</label>
+                        <textarea formControlName="Description" class="form-control" [(ngModel)]="updateSlotModel.Description" placeholder="{{ 'description' | translate }}"></textarea>
+                    </div>
+                </div>
+                <p-footer>
+                    <button pButton type="submit" [disabled]="!updateAppointmentForm.valid" class="ui-button-info"  label="{{ 'update' | translate }}"></button>
+                    <button type="button" (click)="DeleteEncounter()" pButton label="{{ 'delete' | translate }}"></button>
+                </p-footer>
+            </form>
+        </p-dialog>
+        <p-dialog [(visible)]="display" [draggable]="false" header="{{ 'createAppointment' | translate }}" [width]="550">
+                <div class="row">
+                        <div class="col-md-offset-8 col-md-4">
+                            <button pButton type="button" (click)="initPatientModal()" label="{{ 'addPatient' | translate }}" icon="fa-plus"></button>
+                        </div>
+                    </div>
+            <form  [formGroup]="AddAppointmentForm" (ngSubmit)="AddEncounter(AddAppointmentForm.value)">
+               
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{{  "selectPatient" | translate }}</label>
+                        <p-dropdown formControlName="PatientID" [options]="slotModel.listPatients" [(ngModel)]="slotModel.PatientID" required placeholder="{{ 'select' | translate }}"
+                            (onChange)="getPatientDetailByID()" [filter]="true"></p-dropdown>
+                            <div *ngIf="updateAppointmentForm.controls['PatientID'].dirty && !updateAppointmentForm.controls['PatientID'].valid && updateAppointmentForm.controls['PatientID'].touched && updateAppointmentForm.controls['PatientID'].errors"
+                            class="error-message">
+                            <div style="color:Red" *ngIf="updateAppointmentForm.controls['PatientID'].errors.required">Please select patient </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{  "DateofBirth" | translate }}</label>
+                        <p-calendar formControlName="DateOfBirth" [(ngModel)]="slotModel.DateOfBirth" disabled="true"></p-calendar>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{{  "HomePhone" | translate }}</label>
+                        <p-inputMask formControlName="HomePhone"  [(ngModel)]="slotModel.HomePhone" disabled="true" unmask="true" mask="(999)999-9999" slotChar="_"></p-inputMask>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{  "CellPhone" | translate }}</label>
+                        <p-inputMask formControlName="CellPhone"  [(ngModel)]="slotModel.CellPhone" disabled="true" unmask="true" mask="(999)999-9999" slotChar="_"></p-inputMask>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{{ "examType" | translate }}</label>
+                        <p-dropdown formControlName="ExamTypeID" [options]="slotModel.listTestType" [(ngModel)]="slotModel.ExamTypeID" placeholder="{{ 'select' | translate }}"></p-dropdown>
+                        <div *ngIf="updateAppointmentForm.controls['ExamTypeID'].dirty && !updateAppointmentForm.controls['ExamTypeID'].valid && updateAppointmentForm.controls['ExamTypeID'].touched && updateAppointmentForm.controls['ExamTypeID'].errors"
+                        class="error-message">
+                        <div style="color:Red" *ngIf="updateAppointmentForm.controls['ExamTypeID'].errors.required">Please select exam type </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ "appointmentDate" | translate }}</label>
+                        <p-calendar [(ngModel)]="slotModel.AppDate" formControlName="AppDate"  [disabledDays]="calendarModel.disabledDays"></p-calendar>
+                        <div *ngIf="updateAppointmentForm.controls['AppDate'].dirty && !updateAppointmentForm.controls['AppDate'].valid && updateAppointmentForm.controls['AppDate'].touched && updateAppointmentForm.controls['AppDate'].errors"
+                        class="error-message">
+                        <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppDate'].errors.required">Please select appointment Date</div>
+                        <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppDate'].errors.checkValidDate"> Please select a valid appointment Date</div>
+                    </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{{ "startTime" | translate }}</label>
+                        <p-calendar [(ngModel)]="slotModel.AppStartTime" formControlName="AppStartTime"  timeOnly="true" showTime="showTime" hourFormat="12"></p-calendar>
+                        <div *ngIf="updateAppointmentForm.controls['AppStartTime'].dirty && !updateAppointmentForm.controls['AppStartTime'].valid && updateAppointmentForm.controls['AppStartTime'].touched && updateAppointmentForm.controls['AppStartTime'].errors"
+                        class="error-message">
+                        <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppStartTime'].errors.required">Please select appointment start time</div>
+                        <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppStartTime'].errors.validAppDuration">Please select valid appointment start time</div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ "endTime" | translate }}</label>
+                        <p-calendar [(ngModel)]="slotModel.AppEndTime" formControlName="AppEndTime" timeOnly="true" showTime="showTime" hourFormat="12"></p-calendar>
+                        <div *ngIf="updateAppointmentForm.controls['AppEndTime'].dirty && !updateAppointmentForm.controls['AppEndTime'].valid && updateAppointmentForm.controls['AppEndTime'].touched && updateAppointmentForm.controls['AppEndTime'].errors"
+                        class="error-message">
+                        <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppEndTime'].errors.required">Please select appointment end time</div>
+                        <div style="color:Red" *ngIf="updateAppointmentForm.controls['AppEndTime'].errors.validAppDuration">Please select valid appointment end time</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>{{ "description" | translate }}</label>
+                        <textarea class="form-control" formControlName="Description" [(ngModel)]="slotModel.Description" placeholder="{{ 'description' | translate }}"></textarea>
+                    </div>
+                </div>
+                <p-footer>
+                        <button pButton type="submit" [disabled]="!AddAppointmentForm.valid" class="ui-button-info"  label="{{ 'save' | translate }}"></button>
+                </p-footer>
+            </form>
+        </p-dialog>
+        <p-dialog [(visible)]="showSettings" header="{{ 'scheduleSettings' | translate }}" [width]="550">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>{{ "startTime" | translate }}</label>
+                    <p-calendar [(ngModel)]="agendaSettings.minTime" timeOnly="true" showTime="showTime" hourFormat="24"></p-calendar>
+                </div>
+                <div class="col-md-4">
+                    <label>{{ "endTime" | translate }} </label>
+                    <p-calendar [(ngModel)]="agendaSettings.maxTime" timeOnly="true" showTime="showTime" hourFormat="24"></p-calendar>
+                </div>
+                <div class="col-md-4">
+                    <label>{{ "slotDuration" | translate }}</label>
+                    <p-calendar [(ngModel)]="agendaSettings.slotTime" timeOnly="true" showTime="showTime" hourFormat="24"></p-calendar>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <label>{{ "avaliableOn" | translate }}</label>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p-checkbox [(ngModel)]="agendaSettings.IsSunday" binary="true" label="{{ 'sunday' | translate }}"></p-checkbox>
+                        </div>
+                        <div class="col-md-3">
+                            <p-checkbox [(ngModel)]="agendaSettings.IsMonday" binary="true" label="{{ 'monday' | translate }}"></p-checkbox>
+                        </div>
+                        <div class="col-md-3">
+                            <p-checkbox [(ngModel)]="agendaSettings.IsTuesday" binary="true" label="{{ 'tuesday' | translate }}"></p-checkbox>
+                        </div>
+                        <div class="col-md-3">
+                            <p-checkbox [(ngModel)]="agendaSettings.IsWednesday" binary="true" label="{{ 'wednesday' | translate }}"></p-checkbox>
+                        </div>
+                        <div class="col-md-3">
+                            <p-checkbox [(ngModel)]="agendaSettings.IsThursday" binary="true" label="{{ 'thursday' | translate }}"></p-checkbox>
+                        </div>
+                        <div class="col-md-3">
+                            <p-checkbox [(ngModel)]="agendaSettings.IsFriday" binary="true" label="{{ 'friday' | translate }}"></p-checkbox>
+                        </div>
+                        <div class="col-md-3">
+                            <p-checkbox [(ngModel)]="agendaSettings.IsSaturday" binary="true" label="{{ 'saturday' | translate }}"></p-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p-footer>
+                <button pButton type="button" class="ui-button-info" (click)="saveSchedule()" label="{{ 'save' | translate }}"></button>
+            </p-footer>
+        </p-dialog>
+        <p-dialog [(visible)]="PatientModal" header="{{ 'addPatient' | translate }}" [width]="550">
+                <form  [formGroup]="AddPatientForm" (ngSubmit)="addPatient()">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{ 'Title' | translate }}</label>
+                    <p-dropdown  [options]="agendaPatient.listTitles" [(ngModel)]="agendaPatient.TitleID"  formControlName="TitleID"  placeholder="{{ 'select' | translate }}"></p-dropdown>
+                    <div *ngIf="AddPatientForm.controls['TitleID'].dirty && !AddPatientForm.controls['TitleID'].valid && AddPatientForm.controls['TitleID'].touched && AddPatientForm.controls['TitleID'].errors"
+                    class="error-message">
+                    <div style="color:Red" *ngIf="AddPatientForm.controls['TitleID'].errors.required">Please select patient title</div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                    <label>{{ 'FirstName' | translate }}</label>
+                    <input type="text" class="form-control" [(ngModel)]="agendaPatient.FirstName" formControlName="FirstName" placeholder="First Name" />
+                    <div *ngIf="AddPatientForm.controls['FirstName'].dirty && !AddPatientForm.controls['FirstName'].valid && AddPatientForm.controls['FirstName'].touched && AddPatientForm.controls['FirstName'].errors"
+                    class="error-message">
+                    <div style="color:Red" *ngIf="AddPatientForm.controls['FirstName'].errors.required">Please enter first name</div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{ 'MiddleName' | translate }} </label>
+                    <input type="text" class="form-control" [(ngModel)]="agendaPatient.MiddleName" formControlName="MiddleName"  placeholder="Middle Name" />     
+                   
+                </div>
+              
+                <div class="col-md-6">
+                    <label>{{ 'LastName' | translate }}</label>
+                    <input type="text" class="form-control" [(ngModel)]="agendaPatient.LastName" formControlName="LastName"  placeholder="Last Name" />
+                    <div *ngIf="AddPatientForm.controls['LastName'].dirty && !AddPatientForm.controls['LastName'].valid && AddPatientForm.controls['LastName'].touched && AddPatientForm.controls['LastName'].errors"
+                    class="error-message">
+                    <div style="color:Red" *ngIf="AddPatientForm.controls['LastName'].errors.required">Please enter last name</div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{ 'Medicare' | translate }}</label>
+                    <input type="text" class="form-control" [(ngModel)]="agendaPatient.Medicare" formControlName="Medicare"  placeholder="Medicare" />                   
+
+                </div>
+                <div class="col-md-6">
+                    <label>{{ 'DateofBirth' | translate }}</label>
+                    <p-calendar [(ngModel)]="agendaPatient.DateOfBirth" formControlName="DateOfBirth"  placeholder="Date of birth"></p-calendar>
+                    <div *ngIf="AddPatientForm.controls['DateOfBirth'].dirty && !AddPatientForm.controls['DateOfBirth'].valid && AddPatientForm.controls['DateOfBirth'].touched && AddPatientForm.controls['DateOfBirth'].errors"
+                    class="error-message">
+                    <div style="color:Red" *ngIf="AddPatientForm.controls['DateOfBirth'].errors.required">Please select date of birth</div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{ 'Gender' | translate }}</label>
+                    <p-dropdown [options]="agendaPatient.listGender" [(ngModel)]="agendaPatient.GenderID" formControlName="GenderID"  placeholder="{{ 'select' | translate }}"></p-dropdown>
+                    <div *ngIf="AddPatientForm.controls['GenderID'].dirty && !AddPatientForm.controls['GenderID'].valid && AddPatientForm.controls['GenderID'].touched && AddPatientForm.controls['GenderID'].errors"
+                    class="error-message">
+                    <div style="color:Red" *ngIf="AddPatientForm.controls['GenderID'].errors.required">Please select appointment status</div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Language</label>
+                    <p-dropdown [options]="agendaPatient.listLanguage" [(ngModel)]="agendaPatient.LanguageID" formControlName="LanguageID"   placeholder="{{ 'select' | translate }}"></p-dropdown>
+                    <div *ngIf="AddPatientForm.controls['LanguageID'].dirty && !AddPatientForm.controls['LanguageID'].valid && AddPatientForm.controls['LanguageID'].touched && AddPatientForm.controls['LanguageID'].errors"
+                    class="error-message">
+                    <div style="color:Red" *ngIf="AddPatientForm.controls['LanguageID'].errors.required">Please select appointment status</div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{ 'HomePhone' | translate }}</label>
+                    <p-inputMask [(ngModel)]="agendaPatient.HomePhone" unmask="true" mask="(999)999-9999" formControlName="HomePhone"  slotChar="_"></p-inputMask>
+                </div>
+                <div class="col-md-6">
+                    <label>{{ 'CellPhone' | translate }}</label>
+                    <p-inputMask [(ngModel)]="agendaPatient.CellPhone" unmask="true" mask="(999)999-9999" formControlName="CellPhone"  slotChar="_"></p-inputMask>
+                    <div *ngIf="AddPatientForm.controls['CellPhone'].dirty && !AddPatientForm.controls['CellPhone'].valid && AddPatientForm.controls['CellPhone'].touched && AddPatientForm.controls['CellPhone'].errors"
+                    class="error-message">
+                    <div style="color:Red" *ngIf="AddPatientForm.controls['CellPhone'].errors.required">Please enter cell phone number</div>
+                </div>
+                </div>
+            </div>
+            <p-footer>
+                <button pButton type="submit" [disabled]="!AddPatientForm.valid" class="ui-button-info" label="{{ 'save' | translate }}"></button>
+           
+            </p-footer>
+        </form>
+        </p-dialog>
+        <div class="row bottomMargin-51">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-10 col-sm-10">
+                        <p-dropdown [options]="providers" [(ngModel)]="providerID" (onChange)="initlizeAgenda()">
+                        </p-dropdown>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <button pButton type="button" (click)="getSettings()" icon="fa fa-cog"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <p-schedule [events]="calendarModel.calendarEventModel" defaultView="agendaWeek" timezone='local' [allDaySlot]="false" [minTime]=" calendarModel.minTime"
+            [maxTime]="calendarModel.maxTime" [slotDuration]="calendarModel.slotDuration" [locale]="languageChange.currentLanguage()"
+            [timeFormat]="calendarModel.timeFormat" [hiddenDays]="calendarModel.disabledDays" [snapDuration]="calendarModel.snapDuration"
+            [header]="headerConfig" [height]="600" (onDayClick)="handleEventClick($event)" (onEventClick)="EventDetails($event)"
+            [eventRender]="RenderDetails" (onEventDrop)="updateDrop($event)" (onEventResize)="updateResize($event)" [editable]="true">
+        </p-schedule>
+
+
+
+    </div>
+</div>

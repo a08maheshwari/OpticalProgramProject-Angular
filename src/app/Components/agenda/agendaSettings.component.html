@@ -1,0 +1,29 @@
+<p-dialog [(visible)]="showSettings" [header]="Title" [width]="550" [height]="450">
+    <div class="row">
+        <div class="col-md-4">
+            <label>Start Time</label>
+            <p-calendar [(ngModel)]="agendaSettings.startDate" showTime="showTime" hourFormat="24"></p-calendar>
+        </div>
+        <div class="col-md-4">
+            <label>End Time </label>
+            <p-calendar [(ngModel)]="agendaSettings.endDate" showTime="showTime" hourFormat="12"></p-calendar>
+        </div>
+        <div class="col-md-4">
+            <label>Slot Duration</label>
+            <p-calendar [(ngModel)]="agendaSettings.slotDuration" showTime="showTime" hourFormat="12"></p-calendar>
+        </div>
+    </div>
+    <div>
+        <label>Avaliable on</label>
+        <p-checkbox [(ngModel)]="agendaSettings.IsSunday" binary="true" label="Sunday"></p-checkbox>
+        <p-checkbox [(ngModel)]="agendaSettings.IsMonday" binary="true" label="Monday"></p-checkbox>
+        <p-checkbox [(ngModel)]="agendaSettings.IsTuesday" binary="true" label="Tuesday"></p-checkbox>
+        <p-checkbox [(ngModel)]="agendaSettings.IsWednesday" binary="true" label="Wednesday"></p-checkbox>
+        <p-checkbox [(ngModel)]="agendaSettings.IsThursday" binary="true" label="Thursday"></p-checkbox>
+        <p-checkbox [(ngModel)]="agendaSettings.IsFriday" binary="true" label="Friday"></p-checkbox>
+        <p-checkbox [(ngModel)]="agendaSettings.IsSaturday" binary="true" label="Saturday"></p-checkbox>
+    </div>
+    <!-- <p-footer>
+    <button pButton type="button" class="ui-button-info" (click)="AddPatientSchedule()" label="Ok"></button>
+</p-footer> -->
+</p-dialog>

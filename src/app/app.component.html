@@ -1,0 +1,20 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div *ngIf="commonService.menuVisibility">
+  <app-header *ngIf="commonService.menuVisibility"></app-header>   
+</div>
+  
+<section class="wrapper" *ngIf="commonService.menuVisibility">
+  <app-sidebar></app-sidebar>
+  <div id="page-content-wrapper" class="dashboard">
+        <router-outlet></router-outlet>      
+  </div>
+</section>
+<div *ngIf="commonService.menuVisibility==false">
+  <router-outlet></router-outlet>
+</div>
+<p-confirmDialog  width="425"></p-confirmDialog>
+
+
+
+
+

@@ -1,0 +1,56 @@
+<h1>
+    {{ "login" | translate }}
+</h1>
+<div class="col-lg-12 col-md-12 col-sm-12" id="login_container">
+    <table id="ctl00_ContentPlaceHolder1_Login" style="border-color:#BBBBBB;border-width:1px;border-style:Solid;border-collapse:collapse;" cellspacing="0" cellpadding="1" border="0">
+	    <tbody>
+            <tr>
+		        <td>
+                     <form [formGroup]="form"  (ngSubmit)="onSubmit(form.value, form.valid)" class="ui-g ui-fluid registration_form" novalidate>
+                        <table style="font-family:Verdana;font-size:10pt;width:225px;" cellpadding="0" border="0">
+			            <tbody>
+                            <tr>
+				                <td style="font-weight:bold;" align="center">{{ "login" | translate }}</td>
+                            </tr>
+                            <tr>
+				                <td>
+                                    <label>{{ "username" | translate }}:</label>
+                                    <span style="color:Red">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+				                <td>
+                                     <input  type="text" (paste)="$event.preventDefault()" [(ngModel)]="loginModel.UserName"  formControlName="UserName"  placeholder="Username" required/>
+                                     <div class="alert alert-danger" *ngIf="!form.controls['UserName'].valid && form.controls['UserName'].touched">Please Enter Username</div>
+                                   </td>
+                            </tr>
+                            <tr>
+				                <td>
+                                    <label>{{ "password" | translate }}:</label>
+                                    <span style="color:Red">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+				                <td>
+                                     <input  type="password" (paste)="$event.preventDefault()" [(ngModel)]="loginModel.Password" formControlName="Password"  placeholder="Password" required/>
+                                     <div class="alert alert-danger" *ngIf="!form.controls['Password'].valid && form.controls['Password'].touched">Please Enter Password</div>
+                                </td>
+                            </tr>
+                            <tr>
+				                <td align="left">
+                                    <label>{{ loginModel.ErrorMessage }}</label>
+                                </td>
+			                </tr>
+                            <tr>
+				                <td align="right">
+                                    <input value="{{ 'login' | translate }}"   class="btn btn-primary" type="submit">
+                                </td>
+			                </tr>
+                            </tbody>
+                        </table>
+                     </form>
+                </td>
+	        </tr>
+        </tbody>
+    </table>
+</div>

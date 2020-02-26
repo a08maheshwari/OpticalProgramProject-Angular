@@ -1,0 +1,383 @@
+<div id="page-content-wrapper" class="dashboard">
+  <div class="col welcome-bar ">
+    <!-- welcome bar -->
+    <h1 class="page-title">Dashboard</h1>
+
+  </div>
+
+  <div class="content-area">
+    <form [formGroup]="rForm" (ngSubmit)="addPatient(rForm.value,rForm.valid)">
+
+      <div class="col-md-12 col-sm-12">
+        <div class="col_inner">
+          <div class="row">
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_FileNo">{{ "File" | translate }}:</label>
+                <input name="TextBox_FileNo" type="text" id="TextBox_FileNo" class="form-control" [(ngModel)]="patientModel.FileNo" formControlName="FileNo"
+                  disabled="disabled" />
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <label for="TextBox_OpeningDate">{{ "OpeningDate" | translate }}:</label>
+              <p-calendar [(ngModel)]="patientModel.CreatedDate" formControlName="CreatedDate" readonlyInput="readonlyInput"></p-calendar>
+
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_Title">{{ "Title" | translate }}:</label>&nbsp;
+                <p-dropdown [options]="patientModel._ListTitle" [(ngModel)]="patientModel.TitleID" formControlName="TitleID" [style]="{'width':'150px'}"
+                  placeholder="Select Title"></p-dropdown>
+              </div>
+            </div>
+
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_FirstName">{{ "FirstName" | translate }}:</label>&nbsp;
+                <span style="color:Red">*</span>
+                <input name="TextBox_FirstName" [(ngModel)]="patientModel.FirstName" type="text" id="TextBox_FirstName" class="form-control"
+                  formControlName="FirstName" required/>
+                <div *ngIf="rForm.controls['FirstName'].dirty && !rForm.controls['FirstName'].valid && rForm.controls['FirstName'].touched && rForm.controls['FirstName'].errors"
+                  class="error-message">
+                  <div style="color:Red" *ngIf="rForm.controls['FirstName'].errors.required"> Firstname is required minimum length should be 3 characters </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_MiddleName">{{ "MiddleName" | translate }}:</label>
+                <input name="TextBox_MiddleName" type="text" id="TextBox_MiddleNameid" class="form-control" [(ngModel)]="patientModel.MiddleName"
+                  formControlName="MiddleName" />
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_LastName">{{ "LastName" | translate }}:</label>
+                <span style="color:Red">*</span>
+                <input name="TextBox_LastName" type="text" id="TextBox_LastName" class="form-control" [(ngModel)]="patientModel.LastName"
+                  formControlName="LastName" />
+                <div *ngIf="rForm.controls['LastName'].dirty && !rForm.controls['LastName'].valid && rForm.controls['LastName'].touched && rForm.controls['LastName'].errors"
+                  class="error-message">
+                  <div style="color:Red" *ngIf="rForm.controls['LastName'].errors.required"> Last Name is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_Medicare">{{ "Medicare" | translate }}:</label>&nbsp;
+
+                <input name="TextBox_Medicare" type="text" id="TextBox_Medicare" class="form-control Capital" [(ngModel)]="patientModel.Medicare"
+                  formControlName="Medicare" />
+                <div *ngIf="rForm.controls['Medicare'].dirty && !rForm.controls['Medicare'].valid && rForm.controls['Medicare'].touched && rForm.controls['Medicare'].errors"
+                  class="error-message">
+                  <div style="color:Red" *ngIf="rForm.controls['Medicare'].errors.required"> Medicare is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_DateOfBirth">{{ "DateofBirth" | translate }}:</label>&nbsp;
+                <span style="color:Red">*</span>
+                <p-calendar [(ngModel)]="patientModel.DateOfBirth" dateFormat="mm/dd/yy" formControlName="DateOfBirth" (onSelect)="calculateAge($event)"></p-calendar>
+
+                <div *ngIf="rForm.controls['DateOfBirth'].dirty && !rForm.controls['DateOfBirth'].valid && rForm.controls['DateOfBirth'].touched && rForm.controls['DateOfBirth'].errors">
+                  <div style="color:Red" *ngIf="rForm.controls['DateOfBirth'].errors.required">Please Select Date</div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_Age">{{ "Age" | translate }}:</label>
+                <input name="TextBox_Age" type="text" id="TextBox_Age" [(ngModel)]="patientModel.age" formControlName="age" class="form-control"
+                />
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="DropDownList_Gender">{{ "Gender" | translate }}:</label>
+                <span style="color:Red">*</span>
+                <p-dropdown [options]="patientModel._ListGender" [(ngModel)]="patientModel.Gender" formControlName="Gender" [style]="{'width':'150px'}"
+                  placeholder="Select Gender"></p-dropdown>
+                <div *ngIf="rForm.controls['Gender'].dirty && !rForm.controls['Gender'].valid && rForm.controls['Gender'].touched && rForm.controls['Gender'].errors">
+                  <div style="color:Red" *ngIf="rForm.controls['Gender'].errors.required">Please Select Gender</div>
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="DropDownList_spokenlanguage">{{ "Language" | translate }}:</label>
+                <span style="color:Red">*</span>
+                <p-dropdown [options]="patientModel._ListLanguage" [(ngModel)]="patientModel.SpokenLanguage" formControlName="SpokenLanguage"
+                  [style]="{'width':'150px'}" placeholder="Select Language"></p-dropdown>
+              </div>
+            </div>
+
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_Address">{{ "Address" | translate }}:</label>&nbsp;
+                <span style="color:Red">*</span>
+                <input name="TextBox_Address" type="text" id="TextBox_Address" class="form-control" [(ngModel)]="patientModel.Address" formControlName="Address"
+                />
+                <div *ngIf="rForm.controls['Address'].dirty && !rForm.controls['Address'].valid && rForm.controls['Address'].touched && rForm.controls['Address'].errors">
+                  <div style="color:Red" *ngIf="rForm.controls['Address'].errors.required"> Address is required minimum length should be 3 characters </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="DropDownList_Country">{{ "Country" | translate }}:</label>
+                <span style="color:Red">*</span>
+                <p-dropdown [options]="patientModel._ListCountry" (onChange)="onSelect($event.value,1)" [(ngModel)]="patientModel.CountryID"
+                  formControlName="CountryID" [style]="{'width':'150px'}" placeholder="Select  Country"></p-dropdown>
+                <div *ngIf="rForm.controls['CountryID'].dirty && !rForm.controls['CountryID'].valid && rForm.controls['CountryID'].touched && rForm.controls['CountryID'].errors">
+                  <div style="color:Red" *ngIf="rForm.controls['CountryID'].errors.required">Please Select Country</div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="DropDownList_Province">{{ "Province" | translate }}:</label>&nbsp;
+                <span style="color:Red">*</span>
+                <p-dropdown [options]="patientModel._ListProvince" (onChange)="onSelectState($event.value,1)" [(ngModel)]="patientModel.StateID"
+                  formControlName="StateID" [style]="{'width':'150px'}" placeholder="Select  State"></p-dropdown>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="DropDownList_City">{{ "City" | translate }}:</label>&nbsp;
+                <span style="color:Red">*</span>
+                <p-dropdown [options]="patientModel._ListCity" [(ngModel)]="patientModel.CityId" formControlName="CityId" [style]="{'width':'150px'}"
+                  placeholder="Select City"></p-dropdown>
+              </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_PostalCode">{{ "PostalCode" | translate }}:</label>
+                <input name="TextBox_PostalCode" type="text" id="TextBox_PostalCode" class="form-control Capital" Placeholder="A9A 9A9" [(ngModel)]="patientModel.PostalCode"
+                  formControlName="PostalCode" />
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_CellPhone">{{ "HomePhone" | translate }}:</label>&nbsp;
+                <span style="color:Red">*</span>
+                <p-inputMask unmask="true" mask="(999)999-9999" slotChar="_" [(ngModel)]="patientModel.HomePhone" formControlName="HomePhone"></p-inputMask>
+
+                <div *ngIf="rForm.controls['HomePhone'].dirty && !rForm.controls['HomePhone'].valid && rForm.controls['HomePhone'].touched && rForm.controls['HomePhone'].errors">
+                  <div style="color:Red" *ngIf="rForm.controls['HomePhone'].errors.required">HomePhone is required</div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_CellPhone">{{ "CellPhone" | translate }}:</label>&nbsp;
+                <span style="color:Red">*</span>
+                <p-inputMask unmask="true" mask="(999)999-9999" slotChar="_" [(ngModel)]="patientModel.CellPhone" formControlName="CellPhone"></p-inputMask>
+
+                <div *ngIf="rForm.controls['CellPhone'].dirty && !rForm.controls['CellPhone'].valid && rForm.controls['CellPhone'].touched && rForm.controls['CellPhone'].errors">
+                  <div style="color:Red" *ngIf="rForm.controls['CellPhone'].errors.required">CellPhone is required</div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_WorkPhone">{{ "WorkPhone" | translate }}:</label>&nbsp;
+                <p-inputMask unmask="true" mask="(999)999-9999" slotChar="_" [(ngModel)]="patientModel.WorkPhone" formControlName="WorkPhone"></p-inputMask>
+              </div>
+            </div>
+
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_Extension">{{ "Extension" | translate }}:</label>
+                <input name="TextBox_Extension" type="text" id="TextBox_Extension" class="form-control" [(ngModel)]="patientModel.Extension"
+                  formControlName="Extension" />
+              </div>
+            </div>
+
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TextBox_Email">{{ "Email" | translate }}:</label>
+                <span style="color:Red">*</span>
+                <input name="TextBox_Email" type="text" id="TextBox_Email" class="form-control" [(ngModel)]="patientModel.Email" formControlName="Email"
+                />
+                <div *ngIf="rForm.controls['Email'].dirty && !rForm.controls['Email'].valid && rForm.controls['Email'].touched && rForm.controls['Email'].errors">
+                  <div style="color:Red" *ngIf="rForm.controls['Email'].errors.required">Email is required</div>
+                  <div style="color:Red" *ngIf="!rForm.controls['Email'].errors.required && rForm.controls['Email'].errors.pattern">Please enter valid email</div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="DropDownList_Preference">{{ "Preference" | translate }}:</label>
+
+                <p-dropdown [options]="patientModel._ListContactPreferance" [(ngModel)]="patientModel.PreferenceID" formControlName="PreferenceID"
+                  [style]="{'width':'250px'}" placeholder="Select Preferance"></p-dropdown>
+              </div>
+            </div>
+
+
+
+
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 category">
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="TextBox_Optometrist">{{ "Optometrist" | translate }}:</label>
+                    <input name="TextBox_Optometrist" type="text" id="TextBox_Optometrist" class="form-control" [(ngModel)]="patientModel.Optometrist"
+                      formControlName="Optometrist" />
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="TextBox_Ophthalmologist">{{ "Ophthalmologist" | translate }}:</label>
+                    <input name="TextBox_Ophthalmologist" type="text" id="TextBox_Ophthalmologist" class="form-control" [(ngModel)]="patientModel.Ophthalmologist"
+                      formControlName="Ophthalmologist" />
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="TextBox_Optician">{{ "Optician" | translate }}:</label>
+                    <input name="TextBox_Optician" type="text" id="TextBox_Optician" class="form-control" [(ngModel)]="patientModel.Optician"
+                      formControlName="Optician" />
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="TextBox_Assistant">{{ "Assistant" | translate }}:</label>
+                    <input name="TextBox_Assistant" type="text" id="TextBox_Assistant" class="form-control" [(ngModel)]="patientModel.Assistant"
+                      formControlName="Assistant" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 category">
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="TextBox_ThirdPartyBalance">{{ "ThirdpartyBalance" | translate }}:</label>
+                    <input name="TextBox_ThirdPartyBalance" type="text" value="0.00" id="TextBox_ThirdPartyBalance" class="form-control" [(ngModel)]="patientModel.ThirdPartyBalance"
+                      formControlName="ThirdPartyBalance" />
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="TextBox_PatientBalance">{{ "PatientBalance" | translate }}:</label>
+                    <input name="TextBox_PatientBalance" type="text" value="0.00" id="TextBox_PatientBalance" class="form-control" [(ngModel)]="patientModel.PatientBalance"
+                      formControlName="PatientBalance" />
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="TextBox_Insurer">{{ "Insurer" | translate }}:</label>
+                    <input name="TextBox_Insurer" type="text" id="TextBox_Insurer" class="form-control" [(ngModel)]="patientModel.Insurer" formControlName="Insurer"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="TextBox_PlanNumber">{{ "PlanNumber" | translate }}:</label>
+                    <input name="TextBox_PlanNumber" type="text" id="TextBox_PlanNumber" class="form-control" [(ngModel)]="patientModel.PlanNumber"
+                      formControlName="PlanNumber" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 category">
+              <div class="row">
+                <div class="col-sm-3 hidden">
+                  <div class="form-group">
+                    <label for="TextBox_DoNotRecall">{{ "DoNotRecall" | translate }}:</label>
+                    <input name="TextBox_DoNotRecall" [(ngModel)]="patientModel.DoNotRecall" formControlName="DoNotRecall" type="text" id="TextBox_DoNotRecall"
+                      class="form-control" />
+                  </div>
+                </div>
+                <div class="col-sm-3 hidden">
+                  <div class="form-group">
+                    <label for="DropDownList_Occupation">{{ "Occupation" | translate }}:</label>&nbsp;
+                    <p-dropdown [options]="patientModel._ListOccupation" placeholder="Select Occupation" [style]="{'width':'150px'}" [(ngModel)]="patientModel.Occupation"
+                      formControlName="Occupation"></p-dropdown>
+
+                  </div>
+                </div>
+                <div class="col-sm-3 hidden">
+                  <div class="form-group">
+                    <label for="TextBox_OtherDetail">{{ "OtherDetail" | translate }}:</label>
+                    <input name="TextBox_OtherDetail" [(ngModel)]="patientModel.OtherDetail" formControlName="OtherDetail" type="text" id="TextBox_OtherDetail"
+                      class="form-control" />
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="form-group">
+
+                    <td align="right">
+                      <input type="submit" class="button expanded" value="{{ 'submit' | translate }}" [disabled]="!rForm.valid" class="btn btn-primary">
+
+                    </td>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+
+
+</div>
